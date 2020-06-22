@@ -7,7 +7,7 @@ void setup(){
   size(500, 500);
   //fullScreen();
   colorMode(HSB, 360, 100, 100, 100);
-  for(int i = 0; i < 1000; i++){
+  for(int i = 0; i < 2000; i++){
     agents.add(new Agent());
   }
   background(360);
@@ -23,12 +23,12 @@ void mousePressed(){
 
 void draw(){
   noStroke();
-  //fill(255, 10);
-  //rect(0, 0, width, height);
-  //fill(0, 5);
+  fill(360, 5);
+  rect(0, 0, width, height);
   for(Agent agent : agents){
     agent.update();
   }
+  zoff += 0.001;
 }
 
 class Agent{
@@ -50,11 +50,11 @@ class Agent{
   
   void update(){
     PVector grad = gradient(new PVector(pos.x/scale, pos.y/scale));
-    pos.add(grad.copy().normalize().mult(1));
-    if(grad.mag() < 0.0001){
-      pos = new PVector(random(width), random(height));
-    }
+    pos.add(grad.copy().normalize().rotate(HALF_PI).mult(1));
+    if(grad.mag() < 0.0001)reset();
+    if(pos.x < 0 || pos.x > width || pos.y < 0 || pos.y > height) reset();
+    if(random(1)<0.004)reset();
     fill(grad.mag()*36+200, 100, 100, 10);
-    ellipse(pos.x, pos.y, 2, 2);
+    rect(pos.x, pos.y, 6, 6);
   }
 }

@@ -29,6 +29,13 @@ void draw(){
   for(Agent agent : agents){
     agent.update();
   }
+  if(frameCount%1000 == 0){
+    background(360);
+    for(Agent agent : agents){
+      agent.reset();
+    }
+    zoff = random(100);
+  }
 }
 
 class Agent{
@@ -50,11 +57,10 @@ class Agent{
   
   void update(){
     PVector grad = gradient(new PVector(pos.x/scale, pos.y/scale));
-    pos.add(grad.copy().normalize().mult(1));
-    if(grad.mag() < 0.0001){
-      pos = new PVector(random(width), random(height));
-    }
+    pos.add(grad.copy().normalize().rotate(HALF_PI).mult(1));
+    if(grad.mag() < 0.0001)reset();
+    if(pos.x < 0 || pos.x > width || pos.y < 0 || pos.y > height) reset();
     fill(grad.mag()*36+200, 100, 100, 10);
-    ellipse(pos.x, pos.y, 2, 2);
+    rect(pos.x, pos.y, 2, 2);
   }
 }
