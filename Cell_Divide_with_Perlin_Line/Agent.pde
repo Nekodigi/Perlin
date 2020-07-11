@@ -1,13 +1,14 @@
 class Agent{
   PVector posp, posn;//positive agent, negative agent
   boolean enp = true, enn = true;//enable positive, disable positive
-  float off, bangle;//noise zoffset , base angle
+  float off, bangle, colFac;//noise zoffset , base angle, colFac
   
-  Agent(){
+  Agent(float colFac){
     posp = new PVector(random(width), random(height));
     posn = posp.copy();
     off = random(0);
     bangle = random(TWO_PI);
+    this.colFac = colFac;
   }
   
   void update(){
@@ -24,6 +25,7 @@ class Agent{
   }
   
   void show(){
+    fill(colFac*255);
     if(enp)rect(posp.x, posp.y, agentS, agentS);
     if(enn)rect(posn.x, posn.y, agentS, agentS);
   }
