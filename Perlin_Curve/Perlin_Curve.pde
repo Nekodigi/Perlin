@@ -1,9 +1,9 @@
 PerlinCurve perlinCurve;
 
 void setup(){
-  //size(500, 500);
-  fullScreen();
-  perlinCurve = new PerlinCurve(width/2, height/2, 20, 100, 0.01);
+  size(500, 500);
+  //fullScreen();
+  perlinCurve = new PerlinCurve(width/2, height/2, 5, 100, 0.01);
 }
 
 void draw(){
