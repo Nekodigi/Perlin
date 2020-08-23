@@ -1,5 +1,5 @@
-float scale = 3;//
-float sp = 20;//sapling
+float scale = 1;//3
+float sp = 1;//sapling
 float noiseP = 1/sp*scale;
 float centerAttr = 0.01/sp/scale;//center attract
 float zoff = 0;
@@ -12,8 +12,8 @@ float noiseS = 100*scale;
 PerlinCurve perlinCurve;
 
 void setup(){
-  //size(500, 500);
-  fullScreen();
+  size(500, 500);
+  //fullScreen();
   blendMode(ADD);
   
   colorMode(HSB, 360, 100, 100, 100);
